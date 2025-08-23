@@ -44,7 +44,7 @@ def bulk_download(api_key, formulas_file, log_file):
                     with open(cif_path, "w") as f:
                       f.write(structure.to(fmt="cif"))
                     
-                    log.write(f"{counter}. Formula: {formula}, MP ID: {mp_id}\n")
+                    log.write(f"{counter}. Formula: {formula}, MP ID: {mp_id}, Formation Energy: {doc.formation_energy_per_atom}\n")
                     print(f"Downloaded {cif_filename}")
 
                     counter += 1
@@ -59,3 +59,4 @@ if __name__ == "__main__":
     LOG_FILE = "download_log.txt"
 
     bulk_download(API_KEY, FORMULAS_FILE, LOG_FILE)
+
