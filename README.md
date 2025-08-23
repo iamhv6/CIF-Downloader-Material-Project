@@ -123,7 +123,7 @@ theoretical=True
 
 ## Important Note
 
-- If the repository is downloaded locally, It has to be present in the `Downloads` directory as accordance with the code.
+- If the repository is downloaded locally, It has to be executed from the `Downloads` directory as accordance with the code.
 
 
 
