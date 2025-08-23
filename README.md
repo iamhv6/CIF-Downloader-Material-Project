@@ -16,7 +16,7 @@ A Python script that automatically **bulk downloads** `.cif` (Crystallographic I
 - Materials Project API Key ([materialsproject.org](https://materialsproject.org/))
 - Python packages:
   ```bash
-  pip install mp-api
+  pip install mp_api
   
 ---
 
