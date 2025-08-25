@@ -1,3 +1,4 @@
+#v 1.1.1.0
 from mp_api.client import MPRester
 from pathlib import Path
 import os
@@ -59,4 +60,5 @@ if __name__ == "__main__":
     LOG_FILE = "download_log.txt"
 
     bulk_download(API_KEY, FORMULAS_FILE, LOG_FILE)
+
 
