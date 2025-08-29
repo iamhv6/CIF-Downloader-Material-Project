@@ -1,4 +1,4 @@
-#v 1.1.1.0
+#v 1.1.1.2
 from mp_api.client import MPRester
 from pathlib import Path
 import os
@@ -30,21 +30,24 @@ def bulk_download(api_key, formulas_file, log_file):
 
                     # Take first match
                     doc = docs[0]
-
+                    
+                    ''' #
                     if doc.band_gap == 0:
                         print(f"Skipping {formula} (band gap = 0)")
                         continue
+                    '''
 
-                    mp_id = doc.material_id.replace("mp-", "")  #remove the replace string function if you want to download the files with the instials as mp-
+                    mp_id = doc.material_id              # full ID with "mp-"
                     structure = mpr.get_structure_by_material_id(mp_id)
 
-                    # Save CIF file
-                    cif_filename = f"{mp_id}.cif"
+                   # Use only the number for filename
+                    numeric_id = mp_id.replace("mp-", "")  
+                    cif_filename = f"{numeric_id}.cif"
                     cif_path = os.path.join(download_path, cif_filename)
 
                     with open(cif_path, "w") as f:
-                      f.write(structure.to(fmt="cif"))
-                    
+                     f.write(structure.to(fmt="cif"))
+
                     log.write(f"{counter}. Formula: {formula}, MP ID: {mp_id}, Formation Energy: {doc.formation_energy_per_atom}\n")
                     print(f"Downloaded {cif_filename}")
 
@@ -53,6 +56,8 @@ def bulk_download(api_key, formulas_file, log_file):
                 except Exception as e:
                     print(f"Error processing {formula}: {e}")
 
+
+
 # ===== RUN =====
 if __name__ == "__main__":
     API_KEY = "you_api_key"  # Replace with your MP API key
@@ -60,6 +65,7 @@ if __name__ == "__main__":
     LOG_FILE = "download_log.txt"
 
     bulk_download(API_KEY, FORMULAS_FILE, LOG_FILE)
+
 
 
 
