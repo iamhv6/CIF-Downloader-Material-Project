@@ -35,7 +35,7 @@ def bulk_download(api_key, formulas_file, log_file):
                         print(f"Skipping {formula} (band gap = 0)")
                         continue
 
-                    mp_id = doc.material_id
+                    mp_id = doc.material_id.replace("mp-", "")  #remove the replace string function if you want to download the files with the instials as mp-
                     structure = mpr.get_structure_by_material_id(mp_id)
 
                     # Save CIF file
@@ -60,5 +60,6 @@ if __name__ == "__main__":
     LOG_FILE = "download_log.txt"
 
     bulk_download(API_KEY, FORMULAS_FILE, LOG_FILE)
+
 
 
