@@ -1,4 +1,4 @@
-#v 1.1.1.2
+#v 1.1.1.3
 from mp_api.client import MPRester
 from pathlib import Path
 import os
@@ -31,16 +31,16 @@ def bulk_download(api_key, formulas_file, log_file):
                     # Take first match
                     doc = docs[0]
                     
-                    ''' #
+                    ''' # Use this if you want dont want to download molecules with 0eV band gap
                     if doc.band_gap == 0:
                         print(f"Skipping {formula} (band gap = 0)")
                         continue
                     '''
 
-                    mp_id = doc.material_id              # full ID with "mp-"
+                    mp_id = doc.material_id           
                     structure = mpr.get_structure_by_material_id(mp_id)
 
-                   # Use only the number for filename
+                   # Using only the number for filename, throws a formatting error while downloading if edited directly
                     numeric_id = mp_id.replace("mp-", "")  
                     cif_filename = f"{numeric_id}.cif"
                     cif_path = os.path.join(download_path, cif_filename)
@@ -65,7 +65,3 @@ if __name__ == "__main__":
     LOG_FILE = "download_log.txt"
 
     bulk_download(API_KEY, FORMULAS_FILE, LOG_FILE)
-
-
-
-
